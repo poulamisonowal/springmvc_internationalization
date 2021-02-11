@@ -1,0 +1,75 @@
+Create mvcinter-servlet.context config file
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com" />
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+<!-- Resolves messages based on resource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:locale/messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en" ></property>
+		<property name="cookieName" value="myAppLocaleCookie"></property>
+		<property name="cookieMaxAge" value="3600"></property>
+	</bean>
+<!-- <bean id="localeResolver"
+	class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+	<property name="defaultLocale" value="en" />
+</bean> -->
+
+ 
+  <mvc:interceptors>
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="locale" />
+    </bean>
+  </mvc:interceptors>
+	</beans>
+  
+  Note:
+  	 <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource> with this class
+     Resource bundles will be loaded from the root of the classpath.
+     Typically, the messages for one locale should be stored in one separate properties file. This properties file is called a resource bundle.
+     The encoding for this bundle file is taken as UTF-8
+     
+     
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> this will create cookies in your app. In the above thre
+     cookies are getting created 
+        i)defaultLocale whose value is en. This sets the default locale for you index.jsp page which is English
+        ii)cookieName whose value is myAppLocaleCookie
+        iii) cookie max age=3600ms
+        
+   <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+   Instead of cookie we can create default locale using this class also
+   
+   
+   <mvc:interceptoprs> are used for handling HTTp request instructions
+   
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    Interceptor that allows for changing the current locale on every request, via a configurable request parameter 
+ (default parameter name: "locale"). 
+   
+        
+      
