@@ -1,0 +1,57 @@
+Create maven-web-app
+Create your index.jsp
+We will use spring:form in this index.jsp
+https://www.javatpoint.com/spring-mvc-form-tag-library follow this to know more about spring:form. Spring forms are used for data binding i.e we can easily bind the spring
+form elements with variables
+
+
+index.jsp(/WEB-INF/view
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ page session="false"%>
+<html>
+<head>
+<title><spring:message code="label.title" /></title>
+</head>
+<body>
+	<form method="post" action="login">
+		<table>
+			<tr>
+				<td><label> <strong><spring:message
+								code="label.firstName" /></strong>
+				</label></td>
+				<td><input name="firstName" /></td>
+			</tr>
+			<tr>
+				<td><label> <strong><spring:message
+								code="label.lastName" /></strong>
+				</label></td>
+				<td><input name="lastName" /></td>
+			</tr>
+			
+			<tr>
+			
+		
+			  
+				<spring:message code="label.submit" var="labelSubmit"></spring:message>
+				<td colspan="2"><input type="submit" value="${labelSubmit}" /></td>
+				
+			</tr>
+			<tr>
+			
+				
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
+
+
+Note:
+https://docs.spring.io/spring-framework/docs/1.2.x/taglib/tag/MessageTag.html
+<spring:message is used as label and we can bind it with resource bundle properties for internatiolization. code attribute in spring:message is used for bining the label to label
+in resource property label
+
