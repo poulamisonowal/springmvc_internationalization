@@ -1,0 +1,24 @@
+Create resource bundle
+
+create your resource bundle folder. Right click on your project select new>folder>expand you project name from the list>exapand src>choose main> give folder name resources
+ so the path is /src/main/resources
+ 
+ create one more folde inside resources name it as locale
+ 
+ create your resource properties files in the locale folder. Default locale in this example is en
+ 
+This proerty file is empty text file. Name the file as 
+messages_en.properties
+label.title=Login Page
+label.firstName=First Name
+label.lastName=Last Name
+label.submit=Login
+
+
+Create one more property file for fr locale
+messages_fr.properties
+
+label.title=Connectez-vous page
+label.firstName=Pr\u00E9nom
+label.lastName=Nom
+label.submit=Connexion
